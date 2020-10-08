@@ -27,7 +27,7 @@ namespace LittleDebugger.ApiWithClientTemplate.IntegrationTests
 
                 try 
                 {
-                    var record = await exampleClient.GetAsync(1);
+                    var record = await exampleClient.GetAsync(0);
                 }
                 catch (Exception)
                 {
@@ -39,7 +39,7 @@ namespace LittleDebugger.ApiWithClientTemplate.IntegrationTests
                     Name = "Testing"
                 };
 
-               // await exampleClient.CreateAsync(example);
+                example.Id = (await exampleClient.CreateAsync(example).ConfigureAwait(false));
 
                 var result = await exampleClient.GetAsync(example.Id);
 

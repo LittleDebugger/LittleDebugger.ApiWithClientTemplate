@@ -34,10 +34,7 @@ namespace LittleDebugger.ApiWithClientTemplate.Service
             else
             {
                 services.AddDbContext<ApiWithClientTemplateDatabaseContext>(options =>
-                    options.UseSqlServer("Server = tcp:ApiWithClientTemplate.database.windows.net,1433; Database = ApiWithClientTemplateDb; User ID = dbAdmin; Password = fdajkngoan43k!; Encrypt = true; Connection Timeout = 30;"));
-                
-                //services.AddDbContext<ApiWithClientTemplateDatabaseContext>(options =>
-                //  options.UseSqlite("Data Source=localdatabase.db"));
+                    options.UseSqlite("Data Source=localdatabase.db"));
             }
 
             services.AddSwaggerDocument(settings =>
@@ -45,8 +42,8 @@ namespace LittleDebugger.ApiWithClientTemplate.Service
                 settings.PostProcess = document =>
                 {
                     document.Info.Version = "v1";
-                    document.Info.Title = "Market Data Service";
-                    document.Info.Description = "Service for Managing Market data.";
+                    document.Info.Title = "Example Service";
+                    document.Info.Description = "Service for demonstrating WebApi.";
                 };
             });
         }

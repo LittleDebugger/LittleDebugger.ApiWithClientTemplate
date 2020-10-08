@@ -10,7 +10,7 @@ namespace LittleDebugger.ApiWithClientTemplate.Client
         Task<ExampleModel> Get(int id);
 
         [HttpPost("[Controller]")]
-        StatusCodeResult Create([FromBody] ExampleModel record);
+        Task<int> Create([FromBody] ExampleModel record);
 
         [HttpPut("[Controller]")]
         Task<StatusCodeResult> Update([FromBody] ExampleModel record);

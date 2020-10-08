@@ -22,11 +22,12 @@ namespace LittleDebugger.ApiWithClientTemplate.Service.Controllers
         }
 
         [HttpPost("[Controller]")]
-        public StatusCodeResult Create([FromBody] ExampleModel record)
+        public async Task<int> Create([FromBody] ExampleModel record)
         {
-            _context.Example.Update(record);
-
-            return Ok();
+            _context.Example.Attach(record);
+            await _context.SaveChangesAsync();
+            
+            return record.Id;
         }
 
         [HttpPut("[Controller]")]
@@ -38,7 +39,10 @@ namespace LittleDebugger.ApiWithClientTemplate.Service.Controllers
                 return NotFound();
             }
 
-            _context.Example.Update(record);
+            _context.Entry(existinRecord).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            _context.Entry(record).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            await _context.SaveChangesAsync();
 
             return Ok();
         }
@@ -53,6 +57,8 @@ namespace LittleDebugger.ApiWithClientTemplate.Service.Controllers
             }
 
             _context.Example.Remove(record);
+            await _context.SaveChangesAsync();
+
             return Ok();
         }
     }
